@@ -1381,7 +1381,7 @@ function X({ getScene: n }) {
                         : "Egg Orbit"
                 : i.walking
                   ? "Claw Alley"
-                  : "NO QUARTERS. NO CURFEW.",
+                  : "LEVEL UP YOUR DAY.",
               e("span", { class: "build-number", children: "FREE PLAY" }),
             ],
           }),
@@ -1419,13 +1419,13 @@ function X({ getScene: n }) {
           children: [
             e("span", {
               class: "eyebrow",
-              children: "EST. AFTER HOURS / STILL GOING",
+              children: "YOUR ALL-DAY ARCADE / FREE PLAY",
             }),
             e("div", {
               class: "admission",
               children: [
                 e("span", { class: "ticket-hole" }),
-                e("span", { children: "OPEN LATE / LOSE TRACK OF TIME" }),
+                e("span", { children: "GOOD TIMES. GREAT GAMES." }),
                 e("span", { class: "ticket-hole" }),
               ],
             }),
@@ -1443,11 +1443,11 @@ function X({ getScene: n }) {
             e("div", { class: "title-rule" }),
             e("span", {
               class: "title-scribble",
-              children: "JUST. ONE. MORE.",
+              children: "PLAY. WIN. REPEAT.",
             }),
             e("p", {
               class: "location",
-              children: "Bad ideas. Good prizes. One more go.",
+              children: "Your next favourite place to play.",
             }),
             e("button", {
               id: "enter",
@@ -1456,7 +1456,7 @@ function X({ getScene: n }) {
               onClick: () => n()?.enterHall(),
               children: [
                 e("span", { class: "button-token", children: "◎" }),
-                i.ready ? "LET ME IN" : "Opening the hall…",
+                i.ready ? "LET’S PLAY" : "Opening the hall…",
               ],
             }),
             e("button", {
@@ -1469,7 +1469,7 @@ function X({ getScene: n }) {
             e("p", {
               class: "phase-note",
               children:
-                "Claws with commitment issues. Coin avalanches. Suspiciously cute loot.",
+                "Claw machines. Neon classics. Big-ticket wins. All the fun, right on your laptop.",
             }),
           ],
         }),
@@ -1656,9 +1656,7 @@ function X({ getScene: n }) {
                 e("p", {
                   class: "machine-disclosure",
                   children: [
-                    i.gripProfile === "strong"
-                      ? "Strong grip"
-                      : "Arcade grip",
+                    i.gripProfile === "strong" ? "Strong grip" : "Arcade grip",
                     " ",
                     "· Free play · Physical outcomes",
                   ],
@@ -1775,7 +1773,7 @@ function X({ getScene: n }) {
           children: [
             e("span", {
               class: "sticker sticker-luck",
-              children: "SKILL?\nLUCK?\nYES.",
+              children: "BIG\nPLAY\nENERGY",
             }),
             e("span", {
               class: "sticker sticker-night",
@@ -1783,7 +1781,7 @@ function X({ getScene: n }) {
             }),
             e("span", {
               class: "tape-label",
-              children: "DON’T FEED THE CLAW (IT BITES)",
+              children: "MORE GAMES. MORE GOOD TIMES.",
             }),
             e("span", {
               class: "ticket-strip",
@@ -1858,7 +1856,7 @@ function X({ getScene: n }) {
         !i.playing &&
         e("footer", {
           children: [
-            e("span", { children: "OPEN LATE. BLAME THE CLAW." }),
+            e("span", { children: "PLAY TOGETHER. STAY A LITTLE LONGER." }),
             e("span", {
               class: "quality-label",
               children: [i.quality, " graphics · PC edition"],

@@ -1,0 +1,528 @@
+/* One visual language: red marquees, yellow wayfinding, blue-black cabinet glass. */
+:root {
+  --bulb: #ffe24c;
+  --pink: #ff3f65;
+  --teal: #39dcf0;
+  --white: #f8fbff;
+  --indigo: #071a42;
+  --plum: #122b5c;
+  color: #f8fbff;
+  background: #06122d;
+  font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+}
+.topbar {
+  background: linear-gradient(180deg, #061534ed, #06153488, transparent);
+  padding: 23px 34px;
+  gap: 20px;
+}
+.wordmark {
+  font-size: 20px;
+  letter-spacing: -0.035em;
+}
+.brand-token {
+  background: #ffe24c;
+  color: #121c40;
+  border: 0;
+  outline: 2px solid #ffe24c;
+  outline-offset: 3px;
+  box-shadow: none;
+  transform: rotate(-8deg);
+}
+.build-number {
+  background: #ff3f65;
+  color: white;
+  transform: none;
+  border-radius: 5px;
+  padding: 5px 8px;
+}
+.build-label {
+  color: #c5d5ee;
+  font-family: "Atkinson Hyperlegible";
+  font-size: 12px;
+  letter-spacing: 0.07em;
+}
+.collection-button,
+.icon-button {
+  border-radius: 9px;
+  background: #142b50;
+  border: 1px solid #547396;
+  color: #fff;
+}
+.collection-button:hover {
+  background: #244674;
+  border-color: #39dcf0;
+}
+#ui:has(.title-screen)::before {
+  background:
+    linear-gradient(90deg, #04132deb, #04132db8 33%, #04132d20 65%),
+    linear-gradient(0deg, #04132dd9, transparent 25%);
+}
+.title-screen {
+  left: 6%;
+  max-width: 570px;
+  width: 42%;
+  top: 50%;
+  transform: translateY(-45%);
+}
+.eyebrow {
+  font: 700 12px "Atkinson Hyperlegible";
+  letter-spacing: 0.16em;
+  color: #67e3ed;
+  margin-bottom: 20px;
+}
+.admission {
+  background: #ff3f65;
+  color: white;
+  font: 700 11px "Atkinson Hyperlegible";
+  letter-spacing: 0.12em;
+  transform: rotate(-2deg);
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 16px;
+  box-shadow: 0 7px 25px #ff3f6525;
+}
+.ticket-hole {
+  background: #ffd95c;
+}
+.title-screen h1 {
+  font-size: clamp(4.5rem, 8.6vw, 8.2rem);
+  letter-spacing: -0.05em;
+  line-height: 0.97;
+  transform: none;
+  margin: 24px 0 10px;
+}
+.title-screen h1 > span:first-child {
+  color: #fff;
+  text-shadow:
+    0 4px #254c85,
+    0 0 35px #39dcf02c;
+}
+.title-screen h1 > span:nth-child(2) {
+  color: #ffe24c;
+  transform: none;
+  text-shadow:
+    0 5px #b5741e,
+    0 0 50px #ffe24c1c;
+}
+.title-dot {
+  color: #ff3f65;
+}
+.title-scribble {
+  font: 700 15px "Atkinson Hyperlegible";
+  letter-spacing: 0.18em;
+  color: #60e5ed;
+  transform: none;
+  margin: 18px 0;
+}
+.location {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.4;
+  max-width: 360px;
+  color: white;
+}
+.phase-note {
+  font: 15px/1.5 "Atkinson Hyperlegible";
+  color: #b5cae5;
+  max-width: 320px;
+}
+.primary {
+  border-radius: 9px;
+  background: #ffe24c;
+  color: #10234b;
+  border: 1px solid #fff39e;
+  box-shadow:
+    0 5px #b77819,
+    0 10px 30px #ffe24c18;
+  font: 16px Bungee;
+  min-height: 58px;
+  letter-spacing: 0;
+}
+.primary:hover {
+  background: #ffed87;
+  box-shadow: 0 3px #b77819;
+}
+.title-screen .primary {
+  transform: none;
+  min-width: 260px;
+}
+.secondary {
+  background: #10264be8;
+  border: 1px solid #6a8db3;
+  border-radius: 9px;
+  min-width: 260px;
+  font: 700 14px "Atkinson Hyperlegible";
+  color: #e7f2ff;
+}
+.secondary:hover {
+  background: #214774;
+}
+.sticker-night {
+  display: none;
+}
+.sticker-luck {
+  background: #ff3f65;
+  color: white;
+  border-color: #ff8e9d;
+  outline-color: #ff3f65;
+  box-shadow: 0 0 35px #ff3f6530;
+  font-size: 23px;
+  transform: rotate(9deg);
+}
+.tape-label {
+  background: #39dcf0;
+  color: #08204a;
+  font: 700 12px "Atkinson Hyperlegible";
+  border-radius: 4px;
+  box-shadow: 0 5px 20px #0005;
+}
+.ticket-strip {
+  background: #ffe24c;
+  color: #3a2a14;
+  border-color: #bd8b23;
+}
+.doodle-arrow {
+  font: 700 14px "Atkinson Hyperlegible";
+  color: #fff;
+}
+.arcade-launch {
+  background: #102751ed;
+  border: 1px solid #678db5;
+  border-bottom: 4px solid #ff3f65;
+  border-radius: 10px;
+}
+.arcade-launch strong {
+  color: #fff;
+}
+.arcade-launch small {
+  color: #9de9ef;
+}
+.arcade-launch > span {
+  color: #ffe24c;
+}
+.midway-launch {
+  background: #ff3f65;
+  color: white;
+  border: 1px solid #ff9da9;
+  border-radius: 8px;
+  transform: none;
+  box-shadow:
+    0 4px #951c42,
+    0 8px 30px #ff3f6530;
+  font-size: 13px;
+  padding: 15px 18px;
+  max-width: 300px;
+}
+.controller-status {
+  border-color: #476b98;
+  background: #06162ee8;
+  color: #bacfeb;
+  border-radius: 5px;
+  font-family: "Atkinson Hyperlegible";
+  font-size: 12px;
+}
+.has-controller .controller-status {
+  border-color: #43d8e4;
+  color: #a3f5f5;
+}
+footer {
+  font-family: "Atkinson Hyperlegible";
+  color: #a6c0e4;
+  font-size: 12px;
+}
+.machine-panel,
+.collection-dialog,
+.arcade-picker-card,
+.modal {
+  background: linear-gradient(135deg, #172f5b, #0a1b38);
+  border-color: #4b719d;
+  border-radius: 13px;
+}
+.machine-panel {
+  border-top: 4px solid #ff3f65;
+}
+.machine-readout {
+  background: #071932;
+  border-color: #43658e;
+}
+.machine-readout strong {
+  color: #ffe24c;
+}
+.machine-readout span {
+  color: #56e1ed;
+}
+.machine-heading h1,
+.inspect-caption h1 {
+  color: #fff;
+}
+.machine-heading .serial {
+  color: #ffe24c;
+}
+.camera-button,
+.back-button {
+  background: #17335a;
+  border: 1px solid #51739b;
+  color: #e8f3ff;
+  border-radius: 8px;
+}
+.camera-button:hover,
+.back-button:hover {
+  background: #265184;
+}
+.serial,
+.machine-score {
+  color: #81dce7;
+}
+.collection-dialog h2,
+.arcade-picker h2 {
+  color: #ffe24c;
+}
+.arcade-picker {
+  background: #020d21db;
+  backdrop-filter: blur(7px);
+}
+.arcade-card {
+  background: #10294e;
+  border: 1px solid #456c94;
+  border-radius: 11px;
+}
+.arcade-card:hover {
+  background: #1b3c69;
+  box-shadow: 0 0 22px #39dcf018;
+}
+.arcade-card b {
+  color: #ffe24c;
+}
+.reference-arcade {
+  background:
+    radial-gradient(ellipse at 75% 0, #194b7d 0, transparent 50%),
+    linear-gradient(125deg, #06142f, #0c2147);
+  color: #f5faff;
+  padding: 28px 5%;
+}
+.midway-top {
+  font: 700 12px "Atkinson Hyperlegible";
+  letter-spacing: 0.08em;
+  color: #8be6ed;
+  border-bottom: 1px solid #42638b;
+  padding-bottom: 19px;
+}
+.midway-top button,
+.reference-arcade aside > button:not(.primary),
+.midway-aim button {
+  background: #19365e;
+  border: 1px solid #517ba6;
+  border-radius: 8px;
+  color: #e9f5ff;
+}
+.reference-arcade > h1 {
+  font: clamp(28px, 4.6vw, 62px)/1.1 Bungee;
+  color: #fff;
+  margin-bottom: 15px;
+  letter-spacing: -0.03em;
+}
+.reference-arcade > p {
+  font-size: 18px;
+  color: #aecde8;
+}
+.midway-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  padding-top: 26px;
+}
+.midway-grid > button {
+  padding: 14px 14px 20px;
+  gap: 12px;
+  background: linear-gradient(150deg, #193962, #0b1e3d);
+  border: 1px solid #436b95;
+  border-bottom: 4px solid var(--cabinet);
+  border-top: 0;
+  border-radius: 15px;
+  min-height: 330px;
+  box-shadow: 0 8px 24px #0002;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.midway-grid > button:nth-child(3n + 2) {
+  transform: none;
+}
+.midway-grid > button:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 12px 32px #0005,
+    0 0 20px color-mix(in srgb, var(--cabinet), transparent 85%);
+}
+.cabinet-art {
+  width: 100%;
+  height: 150px;
+  display: block;
+  border-radius: 10px;
+  pointer-events: none;
+}
+.midway-grid strong {
+  font: 20px Bungee;
+  letter-spacing: -0.02em;
+}
+.midway-grid span {
+  font: 700 10px "Atkinson Hyperlegible";
+  letter-spacing: 0.06em;
+}
+.midway-grid small {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #b5cce6;
+}
+.midway-grid b {
+  font: 700 12px "Atkinson Hyperlegible";
+  letter-spacing: 0.12em;
+}
+.midway-game aside h1 {
+  font-size: 38px;
+}
+.midway-game p {
+  color: #c1d3e8;
+}
+.midway-game output {
+  font: 700 17px/1.5 "Atkinson Hyperlegible";
+  color: #ffe24c;
+}
+.midway-score {
+  font: 700 14px "Atkinson Hyperlegible";
+  letter-spacing: 0.05em;
+  color: #5fe1ec;
+}
+.midway-kicker {
+  color: #71dce7;
+  font-family: "Atkinson Hyperlegible";
+  font-weight: 700;
+}
+.midway-canvas {
+  border: 5px solid #204570;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px #6099bc,
+    0 15px 50px #0006,
+    0 0 35px #39dcf014;
+  overflow: hidden;
+}
+.midway-note {
+  color: #8ca9cd !important;
+}
+.midway-aim {
+  font-family: "Atkinson Hyperlegible";
+}
+@media (max-width: 1150px) {
+  .midway-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .title-screen {
+    width: 47%;
+  }
+  .build-label {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .midway-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .topbar {
+    padding: 17px;
+    gap: 12px;
+  }
+  .title-screen {
+    width: 75%;
+  }
+  .title-screen h1 {
+    font-size: clamp(4rem, 12vw, 6rem);
+  }
+  .midway-game aside h1 {
+    font-size: 26px;
+  }
+  .midway-game .primary {
+    font-size: 11px;
+  }
+  .midway-game {
+    gap: 20px;
+  }
+  .midway-launch {
+    font-size: 11px;
+    bottom: 205px;
+  }
+  .location {
+    font-size: 17px;
+  }
+  .reference-arcade {
+    padding: 20px;
+  }
+}
+@media (max-width: 500px) {
+  .midway-grid {
+    grid-template-columns: 1fr;
+  }
+  .midway-grid > button {
+    min-height: 0;
+  }
+  .cabinet-art {
+    height: 160px;
+  }
+  .wordmark {
+    font-size: 15px;
+  }
+  .title-screen {
+    left: 6%;
+    width: 88%;
+  }
+  .sticker-luck {
+    display: none;
+  }
+  .phase-note {
+    font-size: 12px;
+  }
+  .midway-launch {
+    right: 5%;
+    bottom: 175px;
+    font-size: 10px;
+  }
+  .title-screen .primary,
+  .title-screen .secondary {
+    min-width: 210px;
+  }
+  .midway-game aside h1 {
+    font-size: 30px;
+  }
+}
+@media (max-height: 700px) and (min-width: 801px) {
+  .title-screen h1 {
+    font-size: 5.2rem;
+  }
+  .title-screen {
+    top: 49%;
+  }
+  .title-screen .eyebrow {
+    display: none;
+  }
+  .title-scribble {
+    margin: 10px 0;
+  }
+  .location {
+    margin: 14px 0;
+  }
+  .phase-note {
+    font-size: 13px;
+  }
+  .midway-launch {
+    bottom: 215px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .midway-grid > button {
+    transition: none;
+  }
+  .midway-grid > button:hover {
+    transform: none;
+  }
+}
+/* Retire the old paper-note decorations in favour of cabinet signage. */
+.arcade-debris .tape-label,.arcade-debris .doodle-arrow{display:none}

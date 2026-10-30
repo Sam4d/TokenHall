@@ -1,10 +1,43 @@
+import { LaptopGame } from "./laptop-games.js";
 import { saveCollection, g as collectionStatus } from "./arcade.js";
 import { CABINETS, MidwayGame, TAU } from "./midway-physics.js";
 import { padState } from "./gamepad.js";
+function cabinetArt(id, color) {
+  const bricks = Array.from(
+    { length: 18 },
+    (_, i) =>
+      `<rect x="${42 + (i % 6) * 32}" y="${35 + Math.floor(i / 6) * 18}" width="27" height="12" rx="3" fill="${["#ff5c7e", "#ffe05b", "#50deed"][Math.floor(i / 6)]}"/>`,
+  ).join("");
+  const pegs = Array.from(
+    { length: 28 },
+    (_, i) =>
+      `<circle cx="${48 + (i % 7) * 28 + (Math.floor(i / 7) % 2) * 12}" cy="${35 + Math.floor(i / 7) * 24}" r="4" fill="${color}"/>`,
+  ).join("");
+  const shape =
+    id === "bricks"
+      ? bricks +
+        '<path d="M110 135h65" stroke="white" stroke-width="8"/><circle cx="130" cy="108" r="6" fill="white"/>'
+      : id === "rally"
+        ? '<path d="M95 35h70M120 140h70" stroke="white" stroke-width="9"/><path d="M35 87h210" stroke="#fff3" stroke-dasharray="5 6"/><circle cx="145" cy="90" r="8" fill="white"/>'
+        : id === "stack"
+          ? Array.from(
+              { length: 5 },
+              (_, i) =>
+                `<rect x="${60 + i * 9}" y="${135 - i * 23}" width="${150 - i * 15}" height="19" rx="3" fill="${color}" opacity="${0.45 + i * 0.12}"/>`,
+            ).join("")
+          : id.includes("wheel") || id === "lucky"
+            ? `<circle cx="140" cy="85" r="65" stroke="${color}" stroke-width="22" stroke-dasharray="22 5" fill="#172b63"/><circle cx="140" cy="85" r="25" fill="${color}"/><path d="M130 7h20l-10 22z" fill="white"/>`
+            : id === "plinko"
+              ? pegs + '<path d="M40 145h200" stroke="white" stroke-width="5"/>'
+              : id === "cut"
+                ? `<path d="M140 15v70" stroke="white" stroke-width="3"/><circle cx="140" cy="115" r="34" fill="${color}"/><circle cx="111" cy="85" r="16" fill="${color}"/><circle cx="169" cy="85" r="16" fill="${color}"/><path d="M90 50l55 20M90 72l55-20" stroke="#ffe05b" stroke-width="5"/>`
+                : `<ellipse cx="140" cy="100" rx="65" ry="22" stroke="${color}" stroke-width="9" fill="none"/><circle cx="150" cy="45" r="13" fill="#ffe05b"/><path d="M45 145h190" stroke="#fff4" stroke-width="5"/>`;
+  return `<svg class="cabinet-art" viewBox="0 0 280 170" aria-hidden="true"><defs><radialGradient id="glow-${id}"><stop stop-color="${color}" stop-opacity=".28"/><stop offset="1" stop-color="#071333"/></radialGradient></defs><rect width="280" height="170" rx="12" fill="url(#glow-${id})"/>${shape}</svg>`;
+}
 export function installMidway(store) {
   const launch = document.createElement("button");
   launch.className = "midway-launch";
-  launch.textContent = "✹ THE MIDWAY · 8 NEW MACHINES";
+  launch.textContent = "✦ GAME ZONE · 11 CABINETS";
   document.body.append(launch);
   let overlay,
     raf,
@@ -87,24 +120,26 @@ export function installMidway(store) {
   function menu() {
     game = null;
     overlay.innerHTML =
-      '<div class="midway-top"><span>THE MIDWAY / GOOD LUCK OUT THERE</span><button data-close>Back to the hall · B / Esc</button></div><h1>EIGHT MORE REASONS<br>TO MISS YOUR BUS.</h1><p>New floor. New bad decisions. All free play. All controller ready.</p><div class="midway-grid"></div>';
+      '<div class="midway-top"><span>TOKEN HALL / GAME ZONE</span><button data-close>Back to the hall · B / Esc</button></div><h1>PICK YOUR<br>NEXT HIGH SCORE.</h1><p>Big lights. Big wins. Eleven ways to play. No coins needed.</p><div class="midway-grid"></div>';
     overlay.querySelector("[data-close]").onclick = close;
     const grid = overlay.querySelector(".midway-grid");
     for (const [i, c] of CABINETS.entries()) {
       const button = document.createElement("button");
       button.style.setProperty("--cabinet", c.color);
-      button.innerHTML = `<span>0${i + 1} / ${c.ref}</span><strong>${c.name}</strong><small>${c.hint}</small><b>PLAY →</b>`;
+      button.innerHTML = `${cabinetArt(c.id, c.color)}<span>${String(i + 1).padStart(2, "0")} / ${c.ref}</span><strong>${c.name}</strong><small>${c.hint}</small><b>PLAY →</b>`;
       button.onclick = () => play(c);
       grid.append(button);
     }
     grid.querySelector("button").focus();
   }
   function play(c) {
-    game = new MidwayGame(c.id, Math.floor(Math.random() * 0xffffffff));
+    game = c.original
+      ? new LaptopGame(c.id)
+      : new MidwayGame(c.id, Math.floor(Math.random() * 0xffffffff));
     awarded = false;
     debt = 0;
     keys.clear();
-    overlay.innerHTML = `<div class="midway-top"><button data-menu>← Machine floor · B</button><span>${c.ref}</span><button data-close>Leave · Esc</button></div><div class="midway-game"><div class="midway-canvas"><canvas width="600" height="800" aria-label="${c.name} playfield"></canvas></div><aside><span class="midway-kicker">FREE PLAY / PHOTO-INSPIRED CABINET</span><h1>${c.name}</h1><p>${c.hint}</p><output aria-live="polite"></output><div class="midway-score"></div><button class="primary" data-action>${c.id === "bowl" ? "HOLD TO CHARGE" : "PLAY / DROP"} · A / Space</button><button data-retry>Fresh round · X</button><div class="midway-aim"><button aria-label="Aim left">←</button><span>L stick / arrows aim</span><button aria-label="Aim right">→</button></div><p class="midway-note">Tickets go to your existing prize collection. No money. No mystery rigging.</p></aside></div>`;
+    overlay.innerHTML = `<div class="midway-top"><button data-menu>← Machine floor · B</button><span>${c.ref}</span><button data-close>Leave · Esc</button></div><div class="midway-game"><div class="midway-canvas"><canvas width="600" height="800" aria-label="${c.name} playfield"></canvas></div><aside><span class="midway-kicker">${c.original ? "LAPTOP CLASSIC / ORIGINAL" : "FREE PLAY / PHOTO-INSPIRED CABINET"}</span><h1>${c.name}</h1><p>${c.hint}</p><output aria-live="polite"></output><div class="midway-score"></div><button class="primary" data-action>${c.id === "bowl" ? "HOLD TO CHARGE" : c.id === "stack" ? "LOCK BLOCK" : c.original ? "SERVE BALL" : "PLAY / DROP"} · A / Space</button><button data-retry>Fresh round · X</button><div class="midway-aim"><button aria-label="Aim left">←</button><span>L stick / arrows aim</span><button aria-label="Aim right">→</button></div><p class="midway-note">Tickets go to your existing prize collection. No money. No mystery rigging.</p></aside></div>`;
     canvas = overlay.querySelector("canvas");
     ctx = canvas.getContext("2d");
     overlay.querySelector("[data-menu]").onclick = menu;
@@ -195,13 +230,13 @@ export function installMidway(store) {
     const g = game,
       c = ctx;
     c.clearRect(0, 0, 600, 800);
-    c.fillStyle = "#141326";
+    c.fillStyle = "#081c3b";
     c.fillRect(0, 0, 600, 800);
     const accent = CABINETS.find((x) => x.id === g.kind).color;
     c.strokeStyle = accent;
     c.lineWidth = 3;
     c.strokeRect(22, 22, 556, 756);
-    c.font = "bold 16px monospace";
+    c.font = "bold 16px Atkinson Hyperlegible";
     c.textAlign = "center";
     c.fillStyle = accent;
     c.fillText("TOKEN HALL / " + g.kind.toUpperCase(), 300, 52);
@@ -213,10 +248,73 @@ export function installMidway(store) {
     };
     const text = (s, x, y, size = 20, color = "#fff1df") => {
       c.fillStyle = color;
-      c.font = `bold ${size}px monospace`;
+      c.font = `${size >= 26 ? "" : "bold "}${size}px ${size >= 26 ? "Bungee" : "Atkinson Hyperlegible"}`;
       c.fillText(s, x, y);
     };
-    if (g.kind === "wheel" || g.kind === "bigwheel" || g.kind === "lucky") {
+    if (["rally", "bricks", "stack"].includes(g.kind)) {
+      c.strokeStyle = "#ffffff12";
+      c.lineWidth = 1;
+      for (let y = 100; y < 750; y += 40) {
+        c.beginPath();
+        c.moveTo(25, y);
+        c.lineTo(575, y);
+        c.stroke();
+      }
+      if (g.kind === "stack") {
+        for (const b of g.stack) {
+          c.fillStyle = accent;
+          c.shadowColor = accent;
+          c.shadowBlur = 10;
+          c.fillRect(b.x, b.y, b.w, 30);
+        }
+        c.shadowBlur = 0;
+        if (g.phase === "ready") {
+          const top = g.stack.at(-1);
+          c.fillStyle = "#fff";
+          c.fillRect(g.slide, top.y - 40, top.w, 30);
+        }
+        text(g.stack.length - 1 + " / 12 FLOORS", 300, 100, 22);
+      } else {
+        c.fillStyle = accent;
+        c.shadowColor = accent;
+        c.shadowBlur = 15;
+        c.fillRect(g.aim - 60, 704, 120, 12);
+        c.shadowBlur = 0;
+        if (g.kind === "rally") {
+          c.fillStyle = "#ff5b83";
+          c.fillRect(g.enemy - 60, 104, 120, 12);
+          text(g.goals + " : " + g.rival, 300, 385, 70, "#ffffff35");
+        } else {
+          for (const b of g.blocks)
+            if (b.alive) {
+              c.fillStyle = [
+                "#ff5d82",
+                "#ff9250",
+                "#ffe05b",
+                "#53e1dd",
+                "#8294ff",
+              ][b.row];
+              c.fillRect(b.x, b.y, b.w, b.h);
+            }
+          text(g.lives + " LIVES", 300, 110, 18);
+        }
+        if (g.ball) {
+          for (const [i, t] of g.trail.entries()) {
+            c.globalAlpha = (i / g.trail.length) * 0.35;
+            circle(t.x, t.y, 6, accent);
+          }
+          c.globalAlpha = 1;
+          circle(g.ball.x, g.ball.y, 9, "#fff");
+        } else if (g.phase === "ready") {
+          circle(g.aim, 675, 9, "#fff");
+          text("A / SPACE TO SERVE", 300, 620, 18);
+        }
+      }
+    } else if (
+      g.kind === "wheel" ||
+      g.kind === "bigwheel" ||
+      g.kind === "lucky"
+    ) {
       const lucky = g.kind === "lucky",
         r = lucky ? 190 : 235;
       for (let i = 0; i < 16; i++) {

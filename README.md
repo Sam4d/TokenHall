@@ -1,6 +1,6 @@
-# TOKEN HALL — Just One More
+# TOKEN HALL — Play. Win. Repeat.
 
-No quarters. No curfew. An after-hours browser arcade full of crooked neon, physics-driven claws, coin avalanches, surprise eggs, and collectible prizes.
+A laptop-friendly arcade with bright cabinet marquees, electric blue lighting, ticket games, physics claws, and original arcade classics.
 
 ![Token Hall after-hours arcade](docs/after-hours.png)
 
@@ -91,7 +91,7 @@ Collections stay in browser local storage. They are device/browser-local, not an
 
 ## The Midway expansion
 
-![Peg Riot physics playfield](docs/peg-riot.png)
+
 
 Use **THE MIDWAY** button in the hall/title screen, or **RB / R1** on a controller outside a game. Eight additional photo-inspired cabinets live on a dedicated 2D physics floor:
 
@@ -110,6 +110,14 @@ These are original interpretations of the supplied photos, not verified replicas
 
 New floor controls: left stick / D-pad / arrows aim, A / Cross / Space acts (hold/release for bowling), X / Square starts a fresh round, B / Circle returns to the machine floor. Mouse/touch buttons are also available. Keyboard Tab is trapped inside the new floor. Tickets use the existing collection save path and are credited once per completed round. Closing a round before completion awards nothing.
 
-The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/rim collision response, and analytic exponential wheel drag. Background 3D rendering pauses while this floor is open. The expanded Node suite has 25 checks; `python3 scripts/midway-playtest.py` checks every new cabinet in Chromium with the local dev server running. Physical controller testing remains separate.
+The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/rim collision response, and analytic exponential wheel drag. Background 3D rendering pauses while this floor is open. The expanded Node suite has 31 checks; `python3 scripts/midway-playtest.py` checks every new cabinet in Chromium with the local dev server running. Physical controller testing remains separate.
 
 `python3 scripts/midway-controller-playtest.py` additionally checks controller-only entry/play/retry/exit and verifies that ticket awards persist exactly once.
+
+## Arcade Club visual refresh and laptop classics
+
+The current design uses a consistent red/yellow/cyan palette, blue cabinet-glass surfaces, Bungee display typography, and locally hosted Atkinson Hyperlegible for controls and instructions. The game catalog includes lightweight vector cabinet previews. Timezone-style family arcades were the requested direction; direct access to Timezone’s official website was denied by the environment network policy, so this is an independent interpretation, not a researched reproduction or branded clone.
+
+Three original games lead the Game Zone: **Neon Rally** (paddle rally against a tracking rival), **Brick Blitz** (40 destructible bricks and three lives), and **Stack Attack** (twelve precisely overlapping floors). All run locally with Canvas 2D, fixed-step physics, keyboard/controller controls and existing ticket saves. Rally and brick-breaker rounds time out after 90 seconds of active ball play; waiting to serve does not consume the match timer. The Game Zone now contains eleven cabinets in addition to the original 3D arcade.
+
+![Game Zone catalog](docs/game-zone.png)

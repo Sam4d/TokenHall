@@ -6,7 +6,7 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:4173/?quality=low');page.locator('.midway-launch').wait_for(timeout=60000);page.evaluate('async()=>window.padModule=await import("/src/gamepad.js")')
  def press(i):
   page.wait_for_function('padModule.padReader.released');page.evaluate('(i)=>pad.buttons[i].pressed=true',i);page.wait_for_function('(i)=>padModule.padState.buttons[i]',arg=i);page.wait_for_timeout(100);page.evaluate('(i)=>pad.buttons[i].pressed=false',i);page.wait_for_function('(i)=>!padModule.padState.buttons[i]',arg=i)
- press(5);page.locator('.reference-arcade').wait_for();press(0);page.locator('.midway-game').wait_for();press(0)
+ press(5);page.locator('.reference-arcade').wait_for();press(13);press(13);press(13);press(0);page.locator('.midway-game').wait_for();press(0)
  page.wait_for_function('document.querySelector("output").textContent.includes("TICKETS")',timeout=30000)
  tickets=page.evaluate('JSON.parse(localStorage.getItem("token-hall.collection.v1")).tickets');assert tickets>0
  page.wait_for_timeout(600);assert page.evaluate('JSON.parse(localStorage.getItem("token-hall.collection.v1")).tickets')==tickets

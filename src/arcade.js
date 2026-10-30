@@ -1734,7 +1734,7 @@ function ts() {
   for (const c of [-2.4, 2.4]) u(0.012, 1.16, 0.012, c, 3.95, -5.5, a);
   (u(5.1, 0.02, 0.025, 0, 2.865, -5.39, r),
     k("TOKEN HALL", 7.5, 1.06, 0, 3.17, -10.72, "#56eee2"),
-    k("KEEP THE NIGHT PLAYING", 5.2, 0.36, 0, 2.39, -10.71, "#e8d7ff"),
+    k("PLAY. WIN. REPEAT.", 5.2, 0.36, 0, 2.39, -10.71, "#e8d7ff"),
     k("PRIZE COUNTER", 3.8, 0.48, -8.5, 3.05, -6.9, "#ffd18a"),
     k("LUCK LOUNGE", 3.3, 0.48, 9, 3.05, -7, "#70baff"));
   const M = ge(),
@@ -3695,7 +3695,7 @@ class vs {
       })),
       (this.renderer.outputColorSpace = te),
       (this.renderer.toneMapping = vt),
-      (this.renderer.toneMappingExposure = 0.92),
+      (this.renderer.toneMappingExposure = 1.04),
       (this.renderer.info.autoReset = !1),
       (this.renderer.shadowMap.enabled = !0),
       (this.renderer.shadowMap.type = bt),

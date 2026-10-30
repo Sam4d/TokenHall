@@ -1,4 +1,6 @@
+import { LAPTOP_CABINETS } from "./laptop-games.js";
 export const CABINETS = [
+  ...LAPTOP_CABINETS,
   {
     id: "wheel",
     name: "Neon Fortune",

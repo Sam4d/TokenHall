@@ -4,7 +4,7 @@ import { CABINETS, MidwayGame } from "../src/midway-physics.js";
 const advance = (g, n) => {
   for (let i = 0; i < n; i++) g.step(1 / 240);
 };
-for (const c of CABINETS)
+for (const c of CABINETS.filter((c) => !c.original))
   test(`${c.name}: complete rounds are finite, scored once, and reject duplicate actions`, () => {
     const g = new MidwayGame(c.id, 31);
     for (let round = 0; round < g.shots; round++) {
@@ -65,4 +65,11 @@ test("bowling power changes trajectory; aim clamps and invalid time is rejected"
   assert.throws(() => g.step(Infinity), RangeError);
 });
 
-test('waiting before a ball launch does not prematurely terminate its flight',()=>{const g=new MidwayGame('magic');for(let i=0;i<17000;i++)g.step(1/240);g.action();g.step(1/240);assert.equal(g.phase,'falling');assert.ok(g.ball.y<110);});
+test("waiting before a ball launch does not prematurely terminate its flight", () => {
+  const g = new MidwayGame("magic");
+  for (let i = 0; i < 17000; i++) g.step(1 / 240);
+  g.action();
+  g.step(1 / 240);
+  assert.equal(g.phase, "falling");
+  assert.ok(g.ball.y < 110);
+});
