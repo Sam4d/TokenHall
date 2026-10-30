@@ -1,0 +1,431 @@
+/* After Hours: paper, paint, phosphor. The game itself stays unobstructed. */
+:root {
+  --bulb: #edff69;
+  --teal: #66ffc1;
+  --pink: #ff5696;
+  background: #0c0b13;
+}
+.topbar {
+  padding: 22px 34px;
+}
+.wordmark {
+  font-family: Bungee, sans-serif;
+  letter-spacing: -0.04em;
+}
+.brand-token {
+  transform: rotate(-12deg);
+  border-color: #edff69;
+  color: #edff69;
+}
+.build-label {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.build-number {
+  background: #edff69;
+  color: #131316;
+  border: 0;
+  transform: rotate(3deg);
+  border-radius: 0;
+  font-weight: bold;
+}
+#ui:has(.title-screen)::before {
+  background:
+    linear-gradient(90deg, #0b0916eb, #0b09168a 36%, transparent 66%),
+    linear-gradient(0deg, #0b0916bb, transparent 25%);
+}
+.title-screen {
+  left: 6%;
+  width: 42%;
+  max-width: 550px;
+  top: 49%;
+  transform: translateY(-43%);
+}
+.eyebrow {
+  display: block;
+  font: 11px monospace;
+  letter-spacing: 0.18em;
+  color: #b5a6c7;
+  margin-bottom: 22px;
+}
+.admission {
+  font: 700 11px monospace;
+  letter-spacing: 0.09em;
+  background: #ff9dca;
+  transform: rotate(-3deg);
+  padding: 9px 14px;
+  gap: 14px;
+  color: #231327;
+  box-shadow: 5px 5px 0 #0007;
+}
+.title-screen h1 {
+  font-size: clamp(5rem, 8.6vw, 8.5rem);
+  line-height: 0.94;
+  margin: 24px 0 8px;
+  letter-spacing: -0.055em;
+  transform: rotate(-3deg);
+}
+.title-screen h1 > span:first-child {
+  color: #edff69;
+  text-shadow:
+    3px 5px 0 #503a91,
+    5px 8px 0 #141020;
+}
+.title-screen h1 > span:nth-child(2) {
+  color: #f8e9da;
+  transform: translateX(19px) rotate(2deg);
+  text-shadow:
+    3px 5px 0 #e84c85,
+    5px 9px 0 #30182b;
+}
+.title-dot {
+  color: #ff5696;
+}
+.title-rule {
+  display: none;
+}
+.title-scribble {
+  display: block;
+  margin: 14px 0 22px 25px;
+  color: #ff95bd;
+  font: bold italic 16px monospace;
+  letter-spacing: 0.1em;
+  transform: rotate(-4deg);
+}
+.location {
+  font-size: 18px;
+  line-height: 1.4;
+  max-width: 330px;
+  color: #fff1de;
+  margin: 22px 0;
+}
+.primary {
+  border-radius: 5px;
+  box-shadow:
+    4px 5px 0 #595527,
+    6px 7px 0 #0008;
+  background: #edff69;
+  color: #15171b;
+  font-family: Bungee, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+  min-width: 230px;
+}
+.primary:hover {
+  background: #f6ffad;
+  box-shadow: 2px 3px 0 #595527;
+}
+.title-screen .primary {
+  transform: rotate(-1.5deg);
+}
+.secondary {
+  border-radius: 3px;
+  border: 1px dashed #9d8fa5;
+  min-width: 230px;
+  margin-top: 19px;
+  font: 13px monospace;
+  background: #120e1c70;
+}
+.phase-note {
+  font: 13px/1.55 monospace;
+  color: #bfb0ce;
+  max-width: 290px;
+  margin-top: 22px;
+}
+.arcade-debris {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sticker {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  white-space: pre-line;
+  text-align: center;
+  font-family: Bungee, sans-serif;
+  line-height: 1.1;
+  box-shadow: 4px 6px 0 #0007;
+}
+.sticker-luck {
+  right: 7%;
+  top: 18%;
+  height: 126px;
+  width: 126px;
+  background: #edff69;
+  color: #251631;
+  transform: rotate(12deg);
+  font-size: 23px;
+  border-radius: 48% 48% 44% 48%;
+  border: 4px solid #21192a;
+  outline: 3px solid #edff69;
+}
+.sticker-night {
+  left: 45%;
+  top: 20%;
+  background: #b5a0ff;
+  color: #1e143b;
+  font-size: 12px;
+  padding: 13px 17px;
+  border: 2px solid #251b35;
+  transform: rotate(-13deg);
+}
+.tape-label {
+  position: absolute;
+  right: 4%;
+  bottom: 26%;
+  background: #ff8ec1;
+  color: #2e1530;
+  padding: 8px 15px;
+  font: bold 11px monospace;
+  letter-spacing: 0.05em;
+  transform: rotate(-7deg);
+  box-shadow: 3px 3px #0005;
+}
+.ticket-strip {
+  position: absolute;
+  right: 20%;
+  bottom: 9%;
+  background: #e8b577;
+  color: #503725;
+  border-block: 2px dashed #795139;
+  padding: 8px 13px;
+  transform: rotate(13deg);
+  font: bold 13px monospace;
+  letter-spacing: 3px;
+}
+.doodle-arrow {
+  position: absolute;
+  right: 18%;
+  top: 38%;
+  transform: rotate(-7deg);
+  font: bold italic 13px monospace;
+  color: #e8fdb8;
+  text-shadow: 1px 1px #000;
+}
+.cabinet-tag {
+  right: 5%;
+  bottom: 15%;
+  transform: rotate(3deg);
+  background: #17101fe8;
+  border: 1px solid #8b6798;
+  border-left: 5px solid #ff5696;
+  backdrop-filter: none;
+  padding: 12px 18px;
+  box-shadow: 5px 5px #0005;
+}
+.cabinet-tag::before {
+  content: "";
+  position: absolute;
+  width: 65px;
+  height: 17px;
+  background: #d1bfa9bd;
+  top: -10px;
+  left: 30%;
+  transform: rotate(-8deg);
+}
+.arcade-launch {
+  border-radius: 4px;
+  border: 1px solid #b4a0cb;
+  border-bottom: 4px solid #68467d;
+  background: #1d152ee8;
+}
+.arcade-card {
+  border-radius: 5px;
+}
+.arcade-card:nth-child(3n + 1) {
+  border-top: 3px solid #ff8ec1;
+}
+.arcade-card:nth-child(3n + 2) {
+  border-top: 3px solid #edff69;
+}
+.arcade-card:nth-child(3n) {
+  border-top: 3px solid #66ffc1;
+}
+.controller-status {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 24px);
+  padding: 7px 12px;
+  border: 1px solid #72637f;
+  background: #13101ee8;
+  color: #ded3ee;
+  font: 11px/1.4 monospace;
+  text-align: center;
+  z-index: 25;
+  pointer-events: none;
+}
+.has-controller .controller-status {
+  border-color: #a4c966;
+  color: #edffb6;
+}
+.has-controller .pc-notice {
+  display: none;
+}
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 3px solid #edff69;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px #171023;
+}
+footer {
+  padding-bottom: 45px;
+}
+@media (max-height: 760px) and (min-width: 851px) {
+  .title-screen {
+    top: 48%;
+    transform: translateY(-43%);
+  }
+  .eyebrow {
+    display: none;
+  }
+  .title-screen h1 {
+    font-size: clamp(4.2rem, 8vw, 6rem);
+    margin-top: 17px;
+  }
+  .title-scribble {
+    margin-block: 10px;
+  }
+  .location {
+    margin-block: 14px;
+    font-size: 16px;
+  }
+  .phase-note {
+    margin-top: 15px;
+  }
+  .sticker-luck {
+    width: 100px;
+    height: 100px;
+    font-size: 19px;
+  }
+}
+@media (max-width: 1000px) {
+  .sticker-night,
+  .doodle-arrow {
+    display: none;
+  }
+  .title-screen {
+    width: 46%;
+  }
+  .build-label {
+    font-size: 9px;
+  }
+  .topbar {
+    padding: 20px;
+    gap: 12px;
+  }
+}
+@media (max-width: 850px) {
+  .title-screen {
+    left: 7%;
+    width: 75%;
+    top: 47%;
+  }
+  .title-screen h1 {
+    font-size: clamp(4rem, 12vw, 6rem);
+  }
+  .sticker-luck {
+    right: 6%;
+    top: 21%;
+    width: 85px;
+    height: 85px;
+    font-size: 16px;
+  }
+  .tape-label,
+  .ticket-strip,
+  .cabinet-tag,
+  .build-label {
+    display: none;
+  }
+  .topbar {
+    padding: 16px;
+  }
+  .wordmark {
+    font-size: 15px;
+  }
+  .collection-button {
+    font-size: 11px;
+  }
+  .controller-status {
+    font-size: 10px;
+    bottom: 6px;
+    width: max-content;
+  }
+  .machine-heading {
+    left: 20px;
+    top: 86px;
+    max-width: 230px;
+  }
+  .machine-heading h1 {
+    font-size: 25px;
+  }
+  .has-controller .machine-panel {
+    right: 14px;
+    width: 235px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+#ui:has(.title-screen) .cabinet-tag {
+  display: none;
+}
+#ui:has(.title-screen) .arcade-launch {
+  right: 5%;
+  bottom: 12%;
+}
+#ui:has(.title-screen) .ticket-strip {
+  right: 25%;
+  bottom: 8%;
+}
+@media (max-width: 850px) {
+  #ui:has(.title-screen) .arcade-launch {
+    right: 5%;
+    bottom: 70px;
+    width: 235px;
+    padding: 13px;
+  }
+  #ui:has(.title-screen) .phase-note {
+    max-width: 210px;
+  }
+}
+@media (max-height: 640px) {
+  .title-screen .phase-note,
+  .title-screen .eyebrow,
+  .title-screen .title-scribble {
+    display: none;
+  }
+  .title-screen h1 {
+    font-size: 4rem;
+    margin-block: 14px;
+  }
+  .title-screen .location {
+    font-size: 14px;
+    margin-block: 12px;
+  }
+  .title-screen .secondary {
+    margin-top: 12px;
+    padding: 9px;
+  }
+  .title-screen .admission {
+    font-size: 9px;
+  }
+  .title-screen {
+    top: 49%;
+  }
+}
+
+.machine-panel {border-radius:6px;border-top:3px solid #b5a0ff;}
+.has-controller .machine-controls kbd {display:none;}
+.has-controller .machine-controls::before {content:'L';display:inline-grid;place-items:center;width:30px;height:30px;border:2px solid #edff69;border-radius:50%;color:#edff69;font:700 16px monospace;margin-right:12px;}

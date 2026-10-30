@@ -1,0 +1,2 @@
+# Preserve bundled shader strings and identify recovered vendor dependencies.
+assets/*.js -whitespace linguist-vendored

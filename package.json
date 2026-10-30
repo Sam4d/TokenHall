@@ -1,0 +1,16 @@
+{
+  "name": "tokenhall",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An after-hours physics arcade: analog controller claws, coin chaos, crooked neon and collectible prizes.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "test": "node --test tests/*.test.mjs"
+  }
+}
