@@ -1,0 +1,195 @@
+.midway-launch {
+  position: fixed;
+  right: 5%;
+  bottom: 240px;
+  z-index: 26;
+  background: #edff69;
+  color: #201630;
+  padding: 12px 18px;
+  border: 2px solid #201630;
+  transform: rotate(-3deg);
+  box-shadow: 4px 4px #9b80ca;
+  font: 13px Bungee;
+  max-width: 290px;
+}
+body:has(.machine-panel) .midway-launch,
+body:has(.modal-backdrop) .midway-launch {
+  display: none;
+}
+.reference-arcade {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(at 90% 5%, #45243e, #111221 65%);
+  overflow: auto;
+  padding: 28px 4%;
+  color: #fff1df;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+body:has(.reference-arcade) > .controller-status {
+  display: none;
+}
+.midway-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  font: 12px monospace;
+  color: #c8bed7;
+}
+.midway-top button,
+.reference-arcade aside > button:not(.primary),
+.midway-aim button {
+  background: #33273f;
+  border: 1px solid #938198;
+  border-radius: 4px;
+  padding: 12px;
+  color: #fff;
+}
+.reference-arcade h1 {
+  font: clamp(25px, 4vw, 55px)/1.1 Bungee;
+  letter-spacing: -0.04em;
+  margin: 28px 0 18px;
+}
+.reference-arcade > p {
+  color: #c8bad6;
+}
+.midway-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 25px 0;
+}
+.midway-grid > button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 14px;
+  padding: 25px;
+  background: #211d31;
+  border: 1px solid #6b5878;
+  border-top: 5px solid var(--cabinet);
+  border-radius: 5px;
+  min-height: 230px;
+}
+.midway-grid > button:nth-child(3n + 2) {
+  transform: rotate(1deg);
+}
+.midway-grid span {
+  font: 11px monospace;
+  color: var(--cabinet);
+}
+.midway-grid strong {
+  font: 24px Bungee;
+}
+.midway-grid small {
+  font: 15px/1.5 "Atkinson Hyperlegible";
+  color: #c8bad6;
+}
+.midway-grid b {
+  margin-top: auto;
+  color: var(--cabinet);
+}
+.midway-game {
+  display: grid;
+  grid-template-columns: minmax(260px, 600px) minmax(240px, 350px);
+  justify-content: center;
+  gap: 6vw;
+  margin: 24px auto;
+}
+.midway-canvas {
+  max-height: calc(100vh - 110px);
+  aspect-ratio: 3/4;
+  justify-self: center;
+  width: auto;
+  max-width: 100%;
+}
+.midway-canvas canvas {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 15px 50px #0007;
+}
+.midway-game aside {
+  align-self: center;
+}
+.midway-game aside h1 {
+  font-size: 36px;
+}
+.midway-game p {
+  line-height: 1.6;
+  color: #c9c0d7;
+}
+.midway-game output {
+  display: block;
+  min-height: 55px;
+  color: #edff69;
+  font: 18px/1.5 monospace;
+}
+.midway-score {
+  padding: 18px 0;
+  font: 14px monospace;
+}
+.midway-game aside > button {
+  width: 100%;
+  margin: 12px 0;
+}
+.midway-kicker {
+  font: 10px monospace;
+  color: #b3a0ff;
+}
+.midway-aim {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 15px 0;
+  font: 12px monospace;
+}
+.midway-note {
+  font-size: 12px;
+}
+@media (max-width: 800px) {
+  .midway-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .midway-game {
+    gap: 20px;
+    grid-template-columns: minmax(180px, 1fr) minmax(170px, 1fr);
+  }
+  .midway-game aside h1 {
+    font-size: 22px;
+  }
+  .midway-game .primary {
+    min-width: 0;
+    font-size: 11px;
+  }
+  .midway-launch {
+    bottom: 200px;
+    font-size: 10px;
+  }
+  .reference-arcade {
+    padding: 16px;
+  }
+  .midway-top {
+    font-size: 10px;
+  }
+}
+@media (max-width: 500px) {
+  .midway-grid {
+    grid-template-columns: 1fr;
+  }
+  .midway-game {
+    grid-template-columns: 1fr;
+  }
+  .midway-canvas {
+    max-height: 60vh;
+  }
+  .midway-game aside {
+    padding-bottom: 25px;
+  }
+  .midway-top > span {
+    display: none;
+  }
+}

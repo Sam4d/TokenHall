@@ -4230,6 +4230,7 @@ class vs {
   }
 }
 export {
+  it as saveCollection,
   vs as C,
   st as S,
   ys as a,

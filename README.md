@@ -18,7 +18,7 @@ npm run dev
 The local server listens on port 4173 (`PORT` overrides it). Open its local address in a WebGL2-capable desktop browser with hardware acceleration enabled.
 
 ```sh
-npm test        # 13 controller, clock and complete machine-round checks
+npm test        # Controller, clock and complete machine-round checks
 npm run build   # Syntax-check modules and create dist/
 npm run preview # Serve dist/ on port 4173
 ```
@@ -88,3 +88,28 @@ The supplied `TOKENHALL.rar` was an HTTrack mirror of the existing preview, not 
 Recovered application modules retain some minified symbol names. This is not a restoration of the original authoring project or its dependency metadata. Keep vendor modules together: their exports are tied to this recovered build.
 
 Collections stay in browser local storage. They are device/browser-local, not an online account. The existing desktop-first interface is retained; a connected controller can dismiss the small-screen PC notice, but touch-only gameplay is not implemented.
+
+## The Midway expansion
+
+![Peg Riot physics playfield](docs/peg-riot.png)
+
+Use **THE MIDWAY** button in the hall/title screen, or **RB / R1** on a controller outside a game. Eight additional photo-inspired cabinets live on a dedicated 2D physics floor:
+
+| Cabinet        | Reference                 | Gameplay                                                  |
+| -------------- | ------------------------- | --------------------------------------------------------- |
+| Neon Fortune   | Multi-colour ticket wheel | Friction-driven wheel and pointer scoring                 |
+| Big Night Spin | Big Spin wheel            | Long-coasting ticket wheel                                |
+| Skyline Sprint | Superhero timing cabinet  | Stop a rising marker inside a moving target               |
+| Magic Drop     | Magic Drop                | Aim balls through moving hoops, with physical rim bounces |
+| Bowl-a-Ball    | Bowl-O-Ball               | Hold to charge, release to launch through the moving ring |
+| Lucky Loop     | Free Lucky                | Stop a rotating key in the release window                 |
+| Peg Riot       | Plinko                    | Gravity, peg collisions, restitution and scoring bins     |
+| Skill Snip     | Skill Cut                 | Time scissors against a swaying cord to release a plush   |
+
+These are original interpretations of the supplied photos, not verified replicas of commercial machine rules. Online research was blocked by the environment's web policy. The unidentified tiered drop machine was omitted as requested. The original 3D machines remain unchanged.
+
+New floor controls: left stick / D-pad / arrows aim, A / Cross / Space acts (hold/release for bowling), X / Square starts a fresh round, B / Circle returns to the machine floor. Mouse/touch buttons are also available. Keyboard Tab is trapped inside the new floor. Tickets use the existing collection save path and are credited once per completed round. Closing a round before completion awards nothing.
+
+The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/rim collision response, and analytic exponential wheel drag. Background 3D rendering pauses while this floor is open. The expanded Node suite has 25 checks; `python3 scripts/midway-playtest.py` checks every new cabinet in Chromium with the local dev server running. Physical controller testing remains separate.
+
+`python3 scripts/midway-controller-playtest.py` additionally checks controller-only entry/play/retry/exit and verifies that ticket awards persist exactly once.

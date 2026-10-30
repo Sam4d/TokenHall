@@ -1,3 +1,4 @@
+import { installMidway } from "./midway.js";
 import { installController } from "./gamepad.js";
 const __vite__mapDeps = (
   i,
@@ -2095,6 +2096,7 @@ async function ee() {
       (A = new K(document.getElementById("scene"))),
       A.start(),
       (disposeController = installController(() => A, s)),
+      installMidway(s),
       new URLSearchParams(location.search).has("debug") &&
         Object.assign(window, {
           tokenHall: {

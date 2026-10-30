@@ -131,18 +131,23 @@ export function installController(getScene, store) {
     const text = !p.connected
       ? "CONTROLLER READY · Press a pad button to connect"
       : menu
-        ? "PAD CONNECTED · D-pad navigate · A / ✕ select · Y / △ games · B / ○ back"
+        ? "PAD CONNECTED · D-pad navigate · A / ✕ select · Y / △ games · RB Midway · B / ○ back"
         : state.playing
           ? state.activeMachine === "claw"
             ? "L aim X/Z · R walk around · A / ✕ drop · Y / △ view · X / □ retry · B / ○ leave"
             : "L / D-pad aim · A / ✕ play / drop · X / □ retry · B / ○ leave"
-          : "L move · R look · A / ✕ inspect / play · Y / △ games · Start pause";
+          : "L move · R look · A / ✕ inspect / play · Y / △ games · RB Midway · Start pause";
     if (text !== lastText) {
       status.textContent = text;
       lastText = text;
     }
     if (!p.connected || !scene || !state.ready) return;
+    if (document.querySelector(".reference-arcade")) return;
     const b = p.pressed;
+    if (b[5] && !state.playing && !modal) {
+      document.querySelector(".midway-launch")?.click();
+      return;
+    }
     if (b[9]) {
       if (state.settingsOpen)
         document.getElementById("close-settings")?.click();
