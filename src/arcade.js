@@ -1924,6 +1924,23 @@ function ts() {
   crooked.position.set(3.2, 3.95, -6.6);
   crooked.rotation.z = -0.065;
   d.add(crooked);
+  // Overhead aisle lighting and cabinet marquees: a physical arcade floor, not a showroom.
+  for (let aisle = 0; aisle < 3; aisle++) {
+    const z = -7 + aisle * 4.5;
+    for (const x of [-6.4, 6.4]) {
+      u(.065,.045,3.4,x,3.85,z,aisle % 2 ? r : f);
+      u(.085,.045,3.4,x+.15,3.85,z,aisle % 2 ? f : r);
+    }
+  }
+  for (const [label,x,color] of [["TICKET GAMES",-5.4,"#ffe24c"],["PLAY ZONE",4.8,"#52e6ff"]]) {
+    u(3.7,.62,.12,x,3.55,-4.1,o,true);
+    k(label,3.35,.40,x,3.55,-4.02,color);
+    u(3.7,.025,.03,x,3.21,-4.01,x<0?b:f);
+  }
+  for (let n=0;n<8;n++) {
+    const x=-5.3+n*1.5;
+    u(.65,.007,.045,x,.018,-2.6,n%2?r:f);
+  }
   d.updateMatrixWorld(!0);
   const h = new Map(),
     z = [];
@@ -2115,6 +2132,10 @@ class is {
         Number(this.keys.has("KeyD")) - Number(this.keys.has("KeyA"))),
       (this.walkVertical =
         Number(this.keys.has("KeyW")) - Number(this.keys.has("KeyS"))));
+    if (allowLook) {
+      this.lookX += (Number(this.keys.has("KeyL")) - Number(this.keys.has("KeyJ"))) * .012;
+      this.lookY += (Number(this.keys.has("KeyK")) - Number(this.keys.has("KeyI"))) * .009;
+    }
     const p = padState;
     if (p.connected) {
       const [x, y] = p.left,

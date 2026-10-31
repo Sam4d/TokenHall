@@ -526,3 +526,14 @@ footer {
 }
 /* Retire the old paper-note decorations in favour of cabinet signage. */
 .arcade-debris .tape-label,.arcade-debris .doodle-arrow{display:none}
+/* Laptop composition: the room gets the space; controls stay at the edges. */
+.title-screen{width:36%;max-width:490px;left:5%;top:49%}
+.title-screen h1{font-size:clamp(4rem,7.2vw,7rem)}
+.title-screen .location{font-size:19px}
+.title-screen .phase-note::after{content:'KEYBOARD  WASD move · IJKL look · E inspect · Space play\A CONTROLLER  L move · R look · A play · B back';white-space:pre-line;display:block;margin-top:20px;font-size:12px;line-height:1.8;color:#9de8ee}
+.sticker-luck,.ticket-strip{display:none}
+#ui:has(.title-screen)::before{background:linear-gradient(90deg,#04132df2,#04132db3 28%,transparent 57%),linear-gradient(0deg,#04132dc9,transparent 20%)}
+.walk-hints{background:#071b36e8;border:1px solid #4a7ca0;border-radius:9px;padding:12px 18px;max-width:calc(100vw - 50px)}
+.walk-hints::after{content:'Keyboard-only look: I / J / K / L';display:block;color:#8de8ee;font-size:12px;margin-top:6px}
+@media(max-height:800px) and (min-width:900px){.machine-panel{max-height:calc(100vh - 120px);overflow-y:auto;width:260px;right:22px;top:78px;padding:18px}.machine-heading{left:24px;top:95px;max-width:220px}.machine-heading h1{font-size:25px}.machine-panel .machine-readout{margin:12px 0}.machine-panel .machine-score{font-size:11px}.title-screen .phase-note{font-size:13px}.title-screen .phase-note::after{margin-top:12px;font-size:11px}.title-screen .eyebrow{display:none}.midway-launch{bottom:205px}}
+@media(max-width:850px){.title-screen{width:75%;max-width:450px}.title-screen h1{font-size:4.5rem}.title-screen .phase-note::after{font-size:10px}}

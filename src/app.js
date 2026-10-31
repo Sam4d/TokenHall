@@ -1447,7 +1447,7 @@ function X({ getScene: n }) {
             }),
             e("p", {
               class: "location",
-              children: "Your next favourite place to play.",
+              children: "Step onto the arcade floor.",
             }),
             e("button", {
               id: "enter",
