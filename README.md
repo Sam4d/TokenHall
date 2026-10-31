@@ -1,4 +1,4 @@
-# TOKEN HALL — Play. Win. Repeat.
+# TOKEN HALL — Just One More
 
 A laptop-friendly arcade with bright cabinet marquees, electric blue lighting, ticket games, physics claws, and original arcade classics.
 
@@ -116,7 +116,7 @@ The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/ri
 
 ## Arcade Club visual refresh and laptop classics
 
-The current design uses a consistent red/yellow/cyan palette, blue cabinet-glass surfaces, Bungee display typography, and locally hosted Atkinson Hyperlegible for controls and instructions. The game catalog includes lightweight vector cabinet previews. Timezone-style family arcades were the requested direction; direct access to Timezone’s official website was denied by the environment network policy, so this is an independent interpretation, not a researched reproduction or branded clone.
+The current design uses acid yellow, hot pink and neon cyan, dark plum cabinet-glass surfaces, Bungee display typography, and locally hosted Atkinson Hyperlegible for controls and instructions. The game catalog includes original vector cabinets with marquees, screens, joysticks, buttons and coin slots. Timezone-style family arcades were the requested direction; direct access to Timezone’s official website was denied by the environment network policy, so this is an independent interpretation, not a researched reproduction or branded clone.
 
 Three original games lead the Game Zone: **Neon Rally** (paddle rally against a tracking rival), **Brick Blitz** (40 destructible bricks and three lives), and **Stack Attack** (twelve precisely overlapping floors). All run locally with Canvas 2D, fixed-step physics, keyboard/controller controls and existing ticket saves. Rally and brick-breaker rounds time out after 90 seconds of active ball play; waiting to serve does not consume the match timer. The Game Zone now contains eleven cabinets in addition to the original 3D arcade.
 

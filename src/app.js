@@ -1425,7 +1425,7 @@ function X({ getScene: n }) {
               class: "admission",
               children: [
                 e("span", { class: "ticket-hole" }),
-                e("span", { children: "GOOD TIMES. GREAT GAMES." }),
+                e("span", { children: "NO COINS. NO CLOCK. NO SELF-CONTROL." }),
                 e("span", { class: "ticket-hole" }),
               ],
             }),
@@ -1443,7 +1443,7 @@ function X({ getScene: n }) {
             e("div", { class: "title-rule" }),
             e("span", {
               class: "title-scribble",
-              children: "PLAY. WIN. REPEAT.",
+              children: "ONE MORE. THEN WE GO.",
             }),
             e("p", {
               class: "location",
@@ -1456,7 +1456,7 @@ function X({ getScene: n }) {
               onClick: () => n()?.enterHall(),
               children: [
                 e("span", { class: "button-token", children: "◎" }),
-                i.ready ? "LET’S PLAY" : "Opening the hall…",
+                i.ready ? "ONE MORE GAME" : "Opening the hall…",
               ],
             }),
             e("button", {
@@ -1469,7 +1469,7 @@ function X({ getScene: n }) {
             e("p", {
               class: "phase-note",
               children:
-                "Claw machines. Neon classics. Big-ticket wins. All the fun, right on your laptop.",
+                "Meet your plush obsession. Start a coin avalanche. Blame the claw. We always do.",
             }),
           ],
         }),

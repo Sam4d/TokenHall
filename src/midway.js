@@ -32,12 +32,13 @@ function cabinetArt(id, color) {
               : id === "cut"
                 ? `<path d="M140 15v70" stroke="white" stroke-width="3"/><circle cx="140" cy="115" r="34" fill="${color}"/><circle cx="111" cy="85" r="16" fill="${color}"/><circle cx="169" cy="85" r="16" fill="${color}"/><path d="M90 50l55 20M90 72l55-20" stroke="#ffe05b" stroke-width="5"/>`
                 : `<ellipse cx="140" cy="100" rx="65" ry="22" stroke="${color}" stroke-width="9" fill="none"/><circle cx="150" cy="45" r="13" fill="#ffe05b"/><path d="M45 145h190" stroke="#fff4" stroke-width="5"/>`;
-  return `<svg class="cabinet-art" viewBox="0 0 280 170" aria-hidden="true"><defs><radialGradient id="glow-${id}"><stop stop-color="${color}" stop-opacity=".28"/><stop offset="1" stop-color="#071333"/></radialGradient></defs><rect width="280" height="170" rx="12" fill="url(#glow-${id})"/>${shape}</svg>`;
+  const title=CABINETS.find(c=>c.id===id).name.toUpperCase();
+  return `<svg class="cabinet-art" viewBox="0 0 280 355" aria-hidden="true"><defs><linearGradient id="body-${id}" x2="1" y2="1"><stop stop-color="#433457"/><stop offset="1" stop-color="#141123"/></linearGradient><radialGradient id="glow-${id}"><stop stop-color="${color}" stop-opacity=".4"/><stop offset="1" stop-color="#0b101e"/></radialGradient></defs><ellipse cx="142" cy="335" rx="112" ry="12" fill="${color}" opacity=".15"/><path d="M35 24L226 12L249 35V300L220 330H42L25 306V60Z" fill="#090b15" stroke="#6c5b85" stroke-width="2"/><path d="M226 12L249 35V300L220 330V42Z" fill="${color}" opacity=".3"/><path d="M35 24H225V252H38Z" fill="url(#body-${id})" stroke="${color}" stroke-width="3"/><rect x="40" y="30" width="180" height="42" rx="3" fill="${color}"/><text x="130" y="56" fill="#171222" text-anchor="middle" font-family="Bungee" font-size="${title.length>13?12:15}">${title}</text><rect x="43" y="80" width="174" height="148" rx="12" fill="url(#glow-${id})" stroke="#86739b" stroke-width="3"/><g transform="translate(46 95) scale(.6)">${shape}</g><path d="M38 235H220L235 268H27Z" fill="#342b46" stroke="${color}" stroke-width="2"/><ellipse cx="77" cy="254" rx="17" ry="6" fill="#11101b"/><path d="M77 252V237" stroke="#c2bed1" stroke-width="5"/><circle cx="77" cy="235" r="10" fill="${color}"/><ellipse cx="167" cy="253" rx="10" ry="6" fill="#ff5c92"/><ellipse cx="195" cy="249" rx="10" ry="6" fill="#ffe96a"/><path d="M40 272H220V326H40Z" fill="url(#body-${id})"/><rect x="119" y="281" width="41" height="24" rx="3" fill="#090d1a" stroke="#796b88"/><path d="M131 289h17" stroke="${color}" stroke-width="3"/><text x="130" y="319" text-anchor="middle" fill="#b5a5ca" font-family="monospace" font-size="8">TOKEN HALL • FREE PLAY</text><path d="M47 329v8h21v-8M194 329v8h21v-8" stroke="#06070e" stroke-width="8"/></svg>`;
 }
 export function installMidway(store) {
   const launch = document.createElement("button");
   launch.className = "midway-launch";
-  launch.textContent = "✦ GAME ZONE · 11 CABINETS";
+  launch.textContent = "✦ THE GOOD STUFF → 11 GAMES";
   document.body.append(launch);
   let overlay,
     raf,
@@ -120,7 +121,7 @@ export function installMidway(store) {
   function menu() {
     game = null;
     overlay.innerHTML =
-      '<div class="midway-top"><span>TOKEN HALL / GAME ZONE</span><button data-close>Back to the hall · B / Esc</button></div><h1>PICK YOUR<br>NEXT HIGH SCORE.</h1><p>Big lights. Big wins. Eleven ways to play. No coins needed.</p><div class="midway-grid"></div>';
+      '<div class="midway-top"><span>TOKEN HALL / GAME ZONE</span><button data-close>Back to the hall · B / Esc</button></div><h1>YOU SAID<br>“LAST GAME.”</h1><p>That was three games ago. Pick a machine. We’re not judging.</p><div class="midway-grid"></div>';
     overlay.querySelector("[data-close]").onclick = close;
     const grid = overlay.querySelector(".midway-grid");
     for (const [i, c] of CABINETS.entries()) {
