@@ -121,3 +121,9 @@ The current design uses acid yellow, hot pink and neon cyan, dark plum cabinet-g
 Three original games lead the Game Zone: **Neon Rally** (paddle rally against a tracking rival), **Brick Blitz** (40 destructible bricks and three lives), and **Stack Attack** (twelve precisely overlapping floors). All run locally with Canvas 2D, fixed-step physics, keyboard/controller controls and existing ticket saves. Rally and brick-breaker rounds time out after 90 seconds of active ball play; waiting to serve does not consume the match timer. The Game Zone now contains eleven cabinets in addition to the original 3D arcade.
 
 ![Game Zone catalog](docs/game-zone.png)
+
+## Finding every game
+
+The main **PLAY ALL 19 GAMES** button opens the unified catalog: eleven added games followed by the eight original machine/collection selections. Each new game launches directly from that same menu; the Game Zone shortcut is optional. **Explore the 3D floor** is the secondary action. Run `python3 scripts/all-games-playtest.py` to verify catalog visibility and every added game launch.
+
+Pushing this repository is not proof of deployment. The earlier `token-hall-vercel-preview-v020-4.vercel.app` preview could not be checked because outbound access was denied. This checkout has no linked Vercel project or Vercel deployment credentials. Connect the repository to the appropriate Vercel project and deploy `main` using the included build configuration to publish these changes.

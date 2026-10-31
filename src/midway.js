@@ -472,10 +472,17 @@ export function installMidway(store) {
       text("X / FRESH ROUND TO GO AGAIN", 300, 460, 16);
     }
   }
+  const directPlay = event => {
+    const cabinet=CABINETS.find(c=>c.id===event.detail);
+    if(!cabinet)return;
+    open();play(cabinet);
+  };
+  window.addEventListener("tokenhall:play",directPlay);
   launch.onclick = open;
   return () => {
     close();
     launch.remove();
+    window.removeEventListener("tokenhall:play",directPlay);
     window.removeEventListener("keydown", keydown, true);
     window.removeEventListener("keyup", keyup, true);
     window.removeEventListener("blur", blur);

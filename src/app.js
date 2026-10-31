@@ -1,3 +1,4 @@
+import { CABINETS as addedCabinets } from "./midway-physics.js";
 import { installMidway } from "./midway.js";
 import { installController } from "./gamepad.js";
 const __vite__mapDeps = (
@@ -935,9 +936,9 @@ function J({ state: n, getScene: i, onInspect: b }) {
           disabled: !n.ready || n.machineLoading,
           children: [
             e("span", { children: "✦" }),
-            e("strong", { children: "Choose a prize game" }),
+            e("strong", { children: "All 19 games" }),
             e("small", {
-              children: "Claw · Thread cut · Egg spin · Coin prizes",
+              children: "11 new games + 8 original machines",
             }),
           ],
         }),
@@ -1168,7 +1169,7 @@ function J({ state: n, getScene: i, onInspect: b }) {
               }),
               e("h2", {
                 id: "arcade-title",
-                children: "Pick your next little obsession.",
+                children: "All games. One floor.",
               }),
               e("p", {
                 children:
@@ -1177,6 +1178,11 @@ function J({ state: n, getScene: i, onInspect: b }) {
               e("div", {
                 class: "arcade-cards",
                 children: [
+                  addedCabinets.map(c => e("button", {
+                    class:"arcade-card added-game", "data-game":c.id,
+                    onClick:()=>{v();window.dispatchEvent(new CustomEvent("tokenhall:play",{detail:c.id}));},
+                    children:[e("span",{class:"serial",children:c.original?"NEW / LAPTOP CLASSIC":"NEW / PRIZE MACHINE"}),e("strong",{children:c.name}),e("span",{children:c.hint}),e("b",{children:"Play now →"})]
+                  },c.id)),
                   F.map((l) =>
                     e(
                       "button",
@@ -1453,18 +1459,18 @@ function X({ getScene: n }) {
               id: "enter",
               class: "primary",
               disabled: !i.ready || !!i.error,
-              onClick: () => n()?.enterHall(),
+              onClick: () => document.querySelector(".arcade-launch")?.click(),
               children: [
                 e("span", { class: "button-token", children: "◎" }),
-                i.ready ? "ONE MORE GAME" : "Opening the hall…",
+                i.ready ? "PLAY ALL 19 GAMES" : "Opening the hall…",
               ],
             }),
             e("button", {
               id: "inspect",
               class: "secondary",
               disabled: !i.ready,
-              onClick: () => n()?.inspectCabinet(),
-              children: "Meet the claw",
+              onClick: () => n()?.enterHall(),
+              children: "Explore the 3D floor",
             }),
             e("p", {
               class: "phase-note",

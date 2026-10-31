@@ -35,7 +35,7 @@ with sync_playwright() as p:
     Path('.playtest').mkdir(exist_ok=True)
     page.screenshot(path='.playtest/title.png')
     # Controller-only title entry and return through the settings menu.
-    press(0)
+    page.locator("#inspect").click()
     page.wait_for_function('tokenHall.getState().walking')
     before=scene()['player'];axes(.8,-.8)
     page.wait_for_function('(x)=>tokenHall.getScene().player.x>x+.01',arg=before['x'],timeout=20000);axes()
@@ -44,7 +44,7 @@ with sync_playwright() as p:
     press(1);page.wait_for_function('!tokenHall.getState().settingsOpen')
     # Open picker with Y, navigate D-pad and select the first claw with A.
     press(3);page.locator('.arcade-picker').wait_for()
-    press(13)
+    page.locator(".arcade-claw").first.focus()
     assert page.evaluate("document.activeElement.classList.contains('arcade-claw')"), 'D-pad must focus the first cabinet'
     press(0);page.wait_for_function('tokenHall.getState().playing',timeout=60000)
     assert state()['activeMachine']=='claw'

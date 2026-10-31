@@ -570,3 +570,5 @@ footer {
 @media(max-width:750px){.midway-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}.cabinet-art{height:230px}.midway-grid strong{font-size:18px}.reference-arcade:has(.midway-grid)>h1{font-size:43px}}
 @media(max-width:430px){.midway-grid{grid-template-columns:1fr}.cabinet-art{height:300px}.midway-grid>button{max-width:320px;margin:auto}.midway-grid small{max-width:300px}}
 @media(prefers-reduced-motion:reduce){.midway-grid>button{transition:none}.midway-grid>button:hover{transform:none}}
+.added-game{border-top:3px solid #f3ff72!important}.added-game .serial{color:#f3ff72}.arcade-picker-card{width:min(1200px,95vw)}.arcade-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.arcade-card{min-height:185px}.arcade-card strong{font:20px Bungee}.arcade-launch{border-color:#ff74ae}.arcade-launch strong{color:#f3ff72}
+@media(max-width:800px){.arcade-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.arcade-cards{grid-template-columns:1fr}}
