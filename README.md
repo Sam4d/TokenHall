@@ -91,9 +91,7 @@ Collections stay in browser local storage. They are device/browser-local, not an
 
 ## The Midway expansion
 
-
-
-Use **THE MIDWAY** button in the hall/title screen, or **RB / R1** on a controller outside a game. Eight additional photo-inspired cabinets live on a dedicated 2D physics floor:
+Use **THE MIDWAY** button in the hall/title screen, or **RB / R1** on a controller outside a game. Eight photo-inspired machines now live as physical 3D stalls in the shared hall:
 
 | Cabinet        | Reference                 | Gameplay                                                  |
 | -------------- | ------------------------- | --------------------------------------------------------- |
@@ -110,7 +108,7 @@ These are original interpretations of the supplied photos, not verified replicas
 
 New floor controls: left stick / D-pad / arrows aim, A / Cross / Space acts (hold/release for bowling), X / Square starts a fresh round, B / Circle returns to the machine floor. Mouse/touch buttons are also available. Keyboard Tab is trapped inside the new floor. Tickets use the existing collection save path and are credited once per completed round. Closing a round before completion awards nothing.
 
-The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/rim collision response, and analytic exponential wheel drag. Background 3D rendering pauses while this floor is open. The expanded Node suite has 31 checks; `python3 scripts/midway-playtest.py` checks every new cabinet in Chromium with the local dev server running. Physical controller testing remains separate.
+The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/rim collision response, and analytic exponential wheel drag. Only menus pause the hall; gameplay uses the shared 3D room and renderer. The expanded Node suite has 31 checks; `python3 scripts/midway-playtest.py` checks every new cabinet in Chromium with the local dev server running. Physical controller testing remains separate.
 
 `python3 scripts/midway-controller-playtest.py` additionally checks controller-only entry/play/retry/exit and verifies that ticket awards persist exactly once.
 
@@ -118,7 +116,7 @@ The Midway uses fixed 240 Hz simulation steps, bounded catch-up, physical peg/ri
 
 The current design uses acid yellow, hot pink and neon cyan, dark plum cabinet-glass surfaces, Bungee display typography, and locally hosted Atkinson Hyperlegible for controls and instructions. The game catalog includes original vector cabinets with marquees, screens, joysticks, buttons and coin slots. Timezone-style family arcades were the requested direction; direct access to Timezone’s official website was denied by the environment network policy, so this is an independent interpretation, not a researched reproduction or branded clone.
 
-Three original games lead the Game Zone: **Neon Rally** (paddle rally against a tracking rival), **Brick Blitz** (40 destructible bricks and three lives), and **Stack Attack** (twelve precisely overlapping floors). All run locally with Canvas 2D, fixed-step physics, keyboard/controller controls and existing ticket saves. Rally and brick-breaker rounds time out after 90 seconds of active ball play; waiting to serve does not consume the match timer. The Game Zone now contains eleven cabinets in addition to the original 3D arcade.
+Three original games lead the Game Zone: **Neon Rally** (paddle rally against a tracking rival), **Brick Blitz** (40 destructible bricks and three lives), and **Stack Attack** (twelve precisely overlapping floors). All run locally as mesh-based playfields inside 3D stalls, with fixed-step physics, keyboard/controller controls and existing ticket saves. Rally and brick-breaker rounds time out after 90 seconds of active ball play; waiting to serve does not consume the match timer. The shared 3D hall now contains nineteen stalls, including all eleven additions.
 
 ![Game Zone catalog](docs/game-zone.png)
 
@@ -126,4 +124,29 @@ Three original games lead the Game Zone: **Neon Rally** (paddle rally against a 
 
 The main **PLAY ALL 19 GAMES** button opens the unified catalog: eleven added games followed by the eight original machine/collection selections. Each new game launches directly from that same menu; the Game Zone shortcut is optional. **Explore the 3D floor** is the secondary action. Run `python3 scripts/all-games-playtest.py` to verify catalog visibility and every added game launch.
 
-Pushing this repository is not proof of deployment. The earlier `token-hall-vercel-preview-v020-4.vercel.app` preview could not be checked because outbound access was denied. This checkout has no linked Vercel project or Vercel deployment credentials. Connect the repository to the appropriate Vercel project and deploy `main` using the included build configuration to publish these changes.
+Pushing this repository is not proof of deployment. The canonical site is https://tokenhall.vercel.app/. Live access is denied by the execution environment, so a Git push is not proof of a live deployment. This checkout has no linked Vercel project or Vercel deployment credentials. Connect the repository to the appropriate Vercel project and deploy `main` using the included build configuration to publish these changes.
+
+## Integrated 3D stalls and Vercel deployment
+
+![Walkable hall with nineteen physical stalls](docs/physical-hall.png)
+
+![Physical Plinko cabinet in the hall](docs/physical-plinko.png)
+
+![Side view of the actual 3D cabinets](docs/physical-side-view.png)
+
+Every selection has a physical stall in the shared WebGL hall: eight originals and eleven additions. The added stalls have solid control decks, marquees, joystick/buttons, coin slots, emissive edge lighting and moving mesh mechanisms. Walk up and use E / A, or select a machine in the main nineteen-game catalog. No added game opens a separate Canvas 2D playfield. The original claw/coin machines retain Rapier physics; new wheels, balls, pegs and timing mechanisms use fixed-step planar arcade simulation displayed as world-space 3D geometry.
+
+Two aisles face the central walkway. The player enters from the front at z=9.6, with new stalls ahead rather than hidden behind the old spawn point. Decorative canopies, floor markings, hanging signs and marquee bulbs are geometry in the room. Fixed parts batch by material; only the active added cabinet simulates. Distant added cabinets use lightweight attract signage, and distant original claw previews show six prizes instead of eighteen; close-up play retains full detail. One renderer serves the entire hall. Labels use local fonts and small static textures. The sidebar supports arrows / WASD / left stick to aim, Space / A to act, X to retry, V / Y to change view, and B / Escape to leave. Right stick rotates the cabinet view.
+
+For the production build:
+
+```sh
+npm run build
+PORT=4174 npm run preview
+python3 scripts/floor-playtest.py
+python3 scripts/floor-controller-playtest.py
+```
+
+The first test checks all eleven active mesh playfields, nineteen physical stalls, keyboard aiming after HUD interaction, side views, retries, exit, and absence of a secondary game canvas. The second tests a virtual controller plus a real keyboard walk from the hall to proximity entry at a stall. Physical hardware testing remains separate.
+
+Vercel builds to `dist` using `vercel.json`. Each build writes assets under a content-derived `/releases/<hash>/` directory; those assets can be cached for one year with `immutable`. HTML revalidates and `/version.json` identifies the release, preventing stale code under reused filenames. The build needs no external runtime service. No deployment credentials or linked Vercel project are available in this checkout; deploy `main` through the existing Vercel project to publish to tokenhall.vercel.app. Live publication cannot be verified from this environment.

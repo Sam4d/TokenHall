@@ -1,3 +1,8 @@
+import {
+  mountFloor,
+  beginFloorSession,
+  CABINETS as floorDefs,
+} from "./floor-cabinets.js";
 import { SimulationClock as ns } from "./clock.js";
 import { padState } from "./gamepad.js";
 import {
@@ -1776,21 +1781,23 @@ function ts() {
           U.name === "preview-stock" && R.push(U);
         }),
           R.forEach((U) => U.removeFromParent()),
-          (v === g ? L : L.map((U) => U.clone(!0))).forEach((U, F) => {
-            ((U.name = "preview-stock"),
-              U.position.set(
-                ((F % 6) - 2.5) * 0.135,
-                1 + Math.floor(F / 6) * 0.012,
-                -0.21 + Math.floor(F / 6) * 0.19,
-              ),
-              U.rotation.set(
-                0.12 * (F % 3),
-                0.3 * (F % 4),
-                0.17 * ((F % 3) - 1),
-              ),
-              U.scale.setScalar(1.5),
-              v.add(U));
-          }));
+          (v === g ? L : L.slice(0, 6).map((U) => U.clone(!0))).forEach(
+            (U, F) => {
+              ((U.name = "preview-stock"),
+                U.position.set(
+                  ((F % 6) - 2.5) * 0.135,
+                  1 + Math.floor(F / 6) * 0.012,
+                  -0.21 + Math.floor(F / 6) * 0.19,
+                ),
+                U.rotation.set(
+                  0.12 * (F % 3),
+                  0.3 * (F % 4),
+                  0.17 * ((F % 3) - 1),
+                ),
+                U.scale.setScalar(1.5),
+                v.add(U));
+            },
+          ));
       }
     }
     const C = new pt();
@@ -1928,18 +1935,30 @@ function ts() {
   for (let aisle = 0; aisle < 3; aisle++) {
     const z = -7 + aisle * 4.5;
     for (const x of [-6.4, 6.4]) {
-      u(.065,.045,3.4,x,3.85,z,aisle % 2 ? r : f);
-      u(.085,.045,3.4,x+.15,3.85,z,aisle % 2 ? f : r);
+      u(0.065, 0.045, 3.4, x, 3.85, z, aisle % 2 ? r : f);
+      u(0.085, 0.045, 3.4, x + 0.15, 3.85, z, aisle % 2 ? f : r);
     }
   }
-  for (const [label,x,color] of [["TICKET GAMES",-5.4,"#ffe24c"],["PLAY ZONE",4.8,"#52e6ff"]]) {
-    u(3.7,.62,.12,x,3.55,-4.1,o,true);
-    k(label,3.35,.40,x,3.55,-4.02,color);
-    u(3.7,.025,.03,x,3.21,-4.01,x<0?b:f);
+  for (const [label, x, color] of [
+    ["TICKET GAMES", -5.4, "#ffe24c"],
+    ["PLAY ZONE", 4.8, "#52e6ff"],
+  ]) {
+    u(3.7, 0.62, 0.12, x, 3.55, -4.1, o, true);
+    k(label, 3.35, 0.4, x, 3.55, -4.02, color);
+    u(3.7, 0.025, 0.03, x, 3.21, -4.01, x < 0 ? b : f);
   }
-  for (let n=0;n<8;n++) {
-    const x=-5.3+n*1.5;
-    u(.65,.007,.045,x,.018,-2.6,n%2?r:f);
+  for (let n = 0; n < 8; n++) {
+    const x = -5.3 + n * 1.5;
+    u(0.65, 0.007, 0.045, x, 0.018, -2.6, n % 2 ? r : f);
+  }
+  mountFloor({ group: d, cabinets: t, colliders: e });
+  k("ONE MORE GAME / FAMOUS LAST WORDS", 7.4, 0.45, 0, 3.55, 2.7, "#f3ff72");
+  k("THE NO-SLEEP LEAGUE", 4.8, 0.4, -4.4, 2.7, 7.0, "#ff75b6");
+  k("SMALL WINS. BIG NOISE.", 4.8, 0.4, 4.4, 2.7, 7.0, "#5cfff0");
+  for (let tile = 0; tile < 28; tile++) {
+    const x = ((tile % 7) - 3) * 0.32,
+      z = Math.floor(tile / 7) * 0.32 + 5.3;
+    u(0.31, 0.008, 0.31, x, 0.018, z, tile % 2 ? paper : pinkPaper);
   }
   d.updateMatrixWorld(!0);
   const h = new Map(),
@@ -1992,9 +2011,9 @@ class ss {
   constructor(e) {
     ((this.colliders = e),
       (this.x = 0),
-      (this.z = 4.2),
+      (this.z = 9.6),
       (this.previousX = 0),
-      (this.previousZ = 4.2),
+      (this.previousZ = 9.6),
       (this.yaw = 0),
       (this.pitch = 0),
       (this.vx = 0),
@@ -2031,7 +2050,7 @@ class ss {
   }
   reset() {
     ((this.x = this.previousX = 0),
-      (this.z = this.previousZ = 4.2),
+      (this.z = this.previousZ = 9.6),
       (this.yaw = this.pitch = this.vx = this.vz = 0));
   }
 }
@@ -2133,8 +2152,10 @@ class is {
       (this.walkVertical =
         Number(this.keys.has("KeyW")) - Number(this.keys.has("KeyS"))));
     if (allowLook) {
-      this.lookX += (Number(this.keys.has("KeyL")) - Number(this.keys.has("KeyJ"))) * .012;
-      this.lookY += (Number(this.keys.has("KeyK")) - Number(this.keys.has("KeyI"))) * .009;
+      this.lookX +=
+        (Number(this.keys.has("KeyL")) - Number(this.keys.has("KeyJ"))) * 0.012;
+      this.lookY +=
+        (Number(this.keys.has("KeyK")) - Number(this.keys.has("KeyI"))) * 0.009;
     }
     const p = padState;
     if (p.connected) {
@@ -3368,6 +3389,13 @@ class vs {
           } catch {}
       }),
       (this.fixedUpdate = (i) => {
+        if (this.floorSession) {
+          this.previousTime = this.time;
+          this.time += i;
+          this.input.sample(false);
+          this.floorSession.step(i);
+          return;
+        }
         if (
           ((this.previousTime = this.time),
           (this.time += i),
@@ -3504,13 +3532,18 @@ class vs {
           this.placeCamera(b, this.state.paused ? 0 : r),
           this.benchmarkCamera?.(this.camera));
         if (!this.state.playing)
-          for (const l of this.hall.cabinets)
-            l.group.visible =
-              this.state.quality !== "low" ||
-              Math.hypot(
-                l.x - this.camera.position.x,
-                l.z - this.camera.position.z,
-              ) < 7.5;
+          for (const l of this.hall.cabinets) {
+            const distance = Math.hypot(
+              l.x - this.camera.position.x,
+              l.z - this.camera.position.z,
+            );
+            l.group.visible = this.state.quality !== "low" || distance < 7.5;
+            if (l.floorView) {
+              const detailed = this.floorSession?.cabinet === l || distance < 6;
+              l.floorView.live.visible = detailed;
+              l.floorView.attract.visible = !detailed;
+            }
+          }
         const w = this.previousTime + (this.time - this.previousTime) * b;
         this.dust.uniforms.time.value = this.state.reducedMotion ? 0 : w;
         if (!this.state.playing)
@@ -3652,18 +3685,21 @@ class vs {
           this.renderer.setSize(this.width, this.height),
           this.composer.setSize(this.width, this.height),
           (this.camera.aspect = this.width / this.height),
-          (this.camera.fov = this.state.playing
-            ? this.prizeGame
-              ? 36
-              : this.cabinetWalker.active &&
-                  this.state.machineCamera === "front"
-                ? 52
-                : Kt[this.state.machineCamera]
-            : this.state.walking && !this.state.inspecting
-              ? this.state.fov
-              : 36),
+          (this.camera.fov = this.state.floorPlaying
+            ? 42
+            : this.state.playing
+              ? this.prizeGame
+                ? 36
+                : this.cabinetWalker.active &&
+                    this.state.machineCamera === "front"
+                  ? 52
+                  : Kt[this.state.machineCamera]
+              : this.state.walking && !this.state.inspecting
+                ? this.state.fov
+                : 36),
           this.camera.clearViewOffset(),
-          !this.state.playing &&
+          !this.state.floorPlaying &&
+            !this.state.playing &&
             !this.state.inspecting &&
             !this.state.walking &&
             this.camera.setViewOffset(
@@ -3804,6 +3840,9 @@ class vs {
       (this.unsubscribe = X.subscribe((i) => {
         const r = this.state;
         ((this.state = i),
+          this.floorSession &&
+            r.paused !== i.paused &&
+            (this.floorSession.previous = [...(padState.buttons || [])]),
           r.quality !== i.quality && this.applyQuality(i.quality),
           (r.inspecting !== i.inspecting ||
             r.walking !== i.walking ||
@@ -4018,7 +4057,27 @@ class vs {
       this.audio.start(this.state.muted),
       this.lockLook());
   }
+  playFloorGame(id) {
+    beginFloorSession(this, id, X, it, Ce);
+  }
+  exitFloorGame() {
+    const s = this.floorSession;
+    if (!s) return;
+    s.cleanup();
+    s.cabinet.floorView.render(s.game);
+    this.floorSession = null;
+    this.input.reset();
+    this.clock.reset();
+    X.setState({ floorPlaying: false, walking: true, inspecting: false });
+    this.resize();
+    this.beginBlend();
+  }
   inspectCabinet(e = "claw-0") {
+    const added = this.hall.cabinets.find((c) => c.id === e && c.floorView);
+    if (added) {
+      this.playFloorGame(added.kind);
+      return;
+    }
     ((this.selected =
       this.hall.cabinets.find((t) => t.id === e) ?? this.hall.cabinets[0]),
       this.resetView(),
@@ -4061,7 +4120,19 @@ class vs {
       (this.blend = 0));
   }
   placeCamera(e, t = 0) {
-    if (this.state.playing && this.prizeGame)
+    if (this.floorSession) {
+      const s = this.floorSession,
+        c = s.cabinet;
+      this.target.set(c.x, 1.15, c.z);
+      this.desiredPosition.set(
+        c.x + Math.sin(c.yaw + s.cam) * 3.8,
+        1.48,
+        c.z + Math.cos(c.yaw + s.cam) * 3.8,
+      );
+      this.camera.position.copy(this.desiredPosition);
+      this.camera.lookAt(this.target);
+      this.desiredRotation.copy(this.camera.quaternion);
+    } else if (this.state.playing && this.prizeGame)
       (this.prizeGame instanceof ve
         ? (this.target.set(0, 1.11, 0.04),
           this.desiredPosition.set(0.24, 1.78, 1.52))
@@ -4167,6 +4238,7 @@ class vs {
       this.resize());
   }
   dispose() {
+    this.floorSession?.cleanup();
     (cancelAnimationFrame(this.raf),
       this.machineGeneration++,
       this.machineView?.dispose(),
@@ -4245,6 +4317,30 @@ class vs {
       resetId: this.resetId,
       blend: this.blend,
       player: { x: this.player.x, z: this.player.z, yaw: this.player.yaw },
+      floorGame: this.floorSession
+        ? {
+            id: this.floorSession.game.kind,
+            phase: this.floorSession.game.phase,
+            score: this.floorSession.game.score,
+            ball: this.floorSession.game.ball,
+            aim: this.floorSession.game.aim,
+            view: this.floorSession.cam,
+          }
+        : null,
+      floorCabinets: this.hall.cabinets
+        .filter((c) => c.floorView)
+        .map((c) => ({
+          id: c.kind,
+          x: c.x,
+          z: c.z,
+          meshes: (() => {
+            let n = 0;
+            c.group.traverse((o) => {
+              if (o.isMesh) n++;
+            });
+            return n;
+          })(),
+        })),
       cabinetCount: this.hall.cabinets.length,
       reflection: this.hall.reflector.visible,
     };

@@ -18,7 +18,7 @@ with sync_playwright() as p:
     page.goto(BASE+'/?quality=low&debug')
     page.locator('#enter:not([disabled])').wait_for(timeout=60000)
     page.wait_for_function("document.documentElement.classList.contains('has-controller')")
-    page.evaluate('async()=>window.testGamepad=await import("/src/gamepad.js")')
+    page.evaluate('async()=>window.testGamepad=await import(new URL("gamepad.js",document.querySelector("script[type=module]").src))')
     page.add_style_tag(content='.debug {display:none!important}')
     def state(): return page.evaluate('tokenHall.getState()')
     def scene(): return page.evaluate('tokenHall.getScene()')

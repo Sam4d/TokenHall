@@ -1,3 +1,4 @@
+import { cabinetArt } from "./cabinet-art.js";
 import { CABINETS as addedCabinets } from "./midway-physics.js";
 import { installMidway } from "./midway.js";
 import { installController } from "./gamepad.js";
@@ -29,7 +30,7 @@ import "../assets/physics-DnKIsk7E.js";
 import "../assets/renderer-W_eveQ7P.js";
 const j = "modulepreload",
   Q = function (n) {
-    return "/" + n;
+    return new URL("../" + n, import.meta.url).href;
   },
   $ = {},
   H = function (i, b, C) {
@@ -927,7 +928,8 @@ function J({ state: n, getScene: i, onInspect: b }) {
         : "Egg Orbit";
   return e(m, {
     children: [
-      !n.playing &&
+      !n.floorPlaying &&
+        !n.playing &&
         !n.settingsOpen &&
         !n.collectionOpen &&
         e("button", {
@@ -1178,11 +1180,39 @@ function J({ state: n, getScene: i, onInspect: b }) {
               e("div", {
                 class: "arcade-cards",
                 children: [
-                  addedCabinets.map(c => e("button", {
-                    class:"arcade-card added-game", "data-game":c.id,
-                    onClick:()=>{v();window.dispatchEvent(new CustomEvent("tokenhall:play",{detail:c.id}));},
-                    children:[e("span",{class:"serial",children:c.original?"NEW / LAPTOP CLASSIC":"NEW / PRIZE MACHINE"}),e("strong",{children:c.name}),e("span",{children:c.hint}),e("b",{children:"Play now →"})]
-                  },c.id)),
+                  addedCabinets.map((c) =>
+                    e(
+                      "button",
+                      {
+                        class: "arcade-card added-game",
+                        "data-game": c.id,
+                        onClick: () => {
+                          v();
+                          window.dispatchEvent(
+                            new CustomEvent("tokenhall:play", { detail: c.id }),
+                          );
+                        },
+                        children: [
+                          e("div", {
+                            class: "picker-cabinet-art",
+                            dangerouslySetInnerHTML: {
+                              __html: cabinetArt(c.id, c.color),
+                            },
+                          }),
+                          e("span", {
+                            class: "serial",
+                            children: c.original
+                              ? "NEW / LAPTOP CLASSIC"
+                              : "NEW / PRIZE MACHINE",
+                          }),
+                          e("strong", { children: c.name }),
+                          e("span", { children: c.hint }),
+                          e("b", { children: "Play now →" }),
+                        ],
+                      },
+                      c.id,
+                    ),
+                  ),
                   F.map((l) =>
                     e(
                       "button",
@@ -1357,7 +1387,7 @@ function X({ getScene: n }) {
     (s.setState({ settingsOpen: !1, paused: !1 }),
       document.querySelector("canvas")?.focus());
   }
-  const S = !i.walking && !i.inspecting && !i.playing;
+  const S = !i.floorPlaying && !i.walking && !i.inspecting && !i.playing;
   return e(m, {
     children: [
       e("header", {
@@ -1700,6 +1730,7 @@ function X({ getScene: n }) {
           ],
         }),
       i.inspecting &&
+        !i.floorPlaying &&
         e(m, {
           children: [
             e("div", {
@@ -1825,8 +1856,9 @@ function X({ getScene: n }) {
                   e("kbd", { children: "E" }),
                   e("span", {
                     children: [
-                      "Meet the claw",
-                      e("small", { children: "Free play · Prize arcade" }),
+                      n()?.hall.cabinets.find((c) => c.id === i.targeted)
+                        ?.name ?? "Play machine",
+                      e("small", { children: "E / A to play · Free play" }),
                     ],
                   }),
                 ],
@@ -2100,7 +2132,7 @@ async function ee() {
       (A = new K(document.getElementById("scene"))),
       A.start(),
       (disposeController = installController(() => A, s)),
-      installMidway(s),
+      installMidway(s, () => A),
       new URLSearchParams(location.search).has("debug") &&
         Object.assign(window, {
           tokenHall: {

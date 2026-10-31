@@ -144,7 +144,7 @@ export function installController(getScene, store) {
     if (!p.connected || !scene || !state.ready) return;
     if (document.querySelector(".reference-arcade")) return;
     const b = p.pressed;
-    if (b[5] && !state.playing && !modal) {
+    if (b[5] && !state.playing && !state.floorPlaying && !modal) {
       document.querySelector(".midway-launch")?.click();
       return;
     }
@@ -157,6 +157,7 @@ export function installController(getScene, store) {
       }
       return;
     }
+    if (state.floorPlaying && !modal) return;
     if (b[1]) {
       escape();
       return;
